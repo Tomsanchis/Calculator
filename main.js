@@ -86,24 +86,32 @@ function isNumeric(value) {
 let current_value = "";
 let current_result = "";
 let current_operation = "";
-let Is_First = true;
 
 const calculator = () => {
   for (let i = 0; i < button.length; i++) {
     button[i].addEventListener("click", () => {
       if (isNumeric(button[i].textContent)) {
-        if (Is_First) {
-          if (result.textContent === "0") {
-            result.innerHTML = "0";
-          } else {
-            current_value += button[i].textContent;
-            result.innerHTML += current_value;
-          }
+        if (button[i].textContent === "0" && current_value === "") {
+          result.innerHTML = "0";
+        } else {
+          result.innerHTML = "";
+          current_value += button[i].textContent;
+          result.innerHTML += current_value;
         }
       }
       if (button[i].textContent === "+") {
         current_operation = button[i].textContent;
+        current_result += parseInt(current_result);
+        console.log("test" + current_result);
+        current_value = "";
+        result.innerHTML = "0";
       }
+      if (button[i].textContent === "=") {
+        result.innerHTML = parseInt(current_value) + parseInt(current_result);
+        current_value = parseInt(current_value) + parseInt(current_result);
+      }
+      console.log("result : " + current_result);
+      console.log("value : " + current_value);
     });
   }
 };
